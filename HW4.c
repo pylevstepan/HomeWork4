@@ -188,6 +188,8 @@ int main(void) {
       }
   }
 
+  sum = 0;
+
   for (int i = 1; i<=max_b; i++){
     if (mtrx_b[i][i] != 0){
       for (int j = 1; j<=max_b; j++){
