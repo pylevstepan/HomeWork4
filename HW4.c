@@ -233,18 +233,18 @@ int main(void) {
         }
       }
     }
-  f5 = 0;
+  int f6 = 0;
   if (max_b == max){
     for (int i = 1; i<= max; i++){
       for (int j = 1; j<= max; j++){
         if ((i <= max_a) && (j <= max_a)) {
           if (mtrx_b[i][j] == mtrx_a[i][j])
-            f5 = 1; 
-          if ((mtrx_b[i][j] != 0) && (f5 = 1))
+            f6 = 1; 
+          if ((mtrx_b[i][j] != 0) && (f6 = 1))
             if (mtrx_b[i][j] > mtrx_a[i][j])
               mtrx_c[i][j] = mtrx_b[i][j];
           }
-          if ((mtrx_b[i][j] != 0) && (f5 = 1))
+          if ((mtrx_b[i][j] != 0) && (f6 = 1))
           mtrx_c[i][j] = mtrx_b[i][j];
         }
       }
@@ -257,7 +257,7 @@ int main(void) {
 
   file_c = fopen("c.dot", "w+");
   fprintf(file_c, "graph new{\n");
-  if (f5 != 0){
+  if ((f5 != 0) || (f6 != 0)){
   for (int i = 1; i<= max; i++){
     for (int j = 1; j<= max; j++){
       while (mtrx_c[i][j] != 0){
