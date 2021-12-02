@@ -171,38 +171,6 @@ int main(void) {
     }
   }
 
-  //Searching for alone tops
-
-  for (int i = 1; i<=max_a; i++){
-    if (mtrx_a[i][i] != 0){
-      for (int j = 1; j<=max_a; j++){
-        if (i != j) {
-        sum = sum + mtrx_a[i][j] + mtrx_a[j][i];
-        }
-      }
-      if (sum == 0){
-        while (mtrx_a[i][i] > 0)
-        mtrx_a[i][i] --;
-      }
-      else sum = 0;
-      }
-  }
-
-  sum = 0;
-
-  for (int i = 1; i<=max_b; i++){
-    if (mtrx_b[i][i] != 0){
-      for (int j = 1; j<=max_b; j++){
-      if (i != j)
-        sum = sum + mtrx_b[i][j] + mtrx_b[j][i];
-      }
-      if (sum == 0){
-        mtrx_b[i][i] = 0;;
-      }
-      else sum = 0;
-    }
-  }
-
 
   //Create and write information to result table
 
@@ -224,9 +192,9 @@ int main(void) {
     for (int i = 1; i<= max; i++){
       for (int j = 1; j<= max; j++){
         if ((i <= max_b) && (j <= max_b)) {
-          if (mtrx_b[i][j] == mtrx_a[i][j])
+          if ((mtrx_b[i][j] == mtrx_a[i][j]) && (mtrx_b[i][j] !=0))
             f5 = 1; 
-          if ((mtrx_b[i][j] != 0) && (f5 = 1))
+          if ((mtrx_b[i][j] != 0) && (f5 == 1))
             if (mtrx_b[i][j] > mtrx_a[i][j])
               mtrx_c[i][j] = mtrx_b[i][j];
           }
@@ -238,21 +206,40 @@ int main(void) {
     for (int i = 1; i<= max; i++){
       for (int j = 1; j<= max; j++){
         if ((i <= max_a) && (j <= max_a)) {
-          if (mtrx_b[i][j] == mtrx_a[i][j])
+          if (((mtrx_b[i][j]) == (mtrx_a[i][j])) && ((mtrx_b[i][j]) != 0)){
             f6 = 1; 
-          if ((mtrx_b[i][j] != 0) && (f6 = 1))
+          }
+          if ((mtrx_b[i][j] != 0) && (f6 == 1))
             if (mtrx_b[i][j] > mtrx_a[i][j])
               mtrx_c[i][j] = mtrx_b[i][j];
           }
-          if ((mtrx_b[i][j] != 0) && (f6 = 1))
+          if ((mtrx_b[i][j] != 0) && (f6 == 1))
           mtrx_c[i][j] = mtrx_b[i][j];
         }
       }
     }
 
+  //Searching for alone tops
+
+  sum = 0;
+
+  for (int i = 1; i<=max; i++){
+    if (mtrx_c[i][i] != 0){
+      for (int j = 1; j<=max; j++){
+      if (i != j)
+        sum = sum + mtrx_c[i][j] + mtrx_c[j][i];
+      }
+      if (sum == 0){
+        mtrx_c[i][i] = 0;;
+      }
+      else sum = 0;
+    }
+  }
+
   fclose(file_a);
   fclose(file_b);
-
+  
+  
   //Write information in new file and draw the result Graph
 
   file_c = fopen("c.dot", "w+");
